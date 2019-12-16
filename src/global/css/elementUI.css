@@ -66,3 +66,17 @@
 .el-menu-item-group__title {
   padding: 0!important;
 }
+
+.el-card {
+  border: 1px solid #dcdee2;
+}
+
+.el-card.is-always-shadow {
+  box-shadow: 0 0 0 0 rgba(0,0,0,0)!important;
+  -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0)!important;
+}
+
+.el-card.is-always-shadow:hover {
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1)!important;
+  -webkit-box-shadow: 0 2px 12px 0 rgba(0,0,0,.1)!important;
+}
