@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="dialog" append-to-body title="执行日志" width="90%">
+  <el-dialog :visible.sync="dialog" append-to-body v-dialogDrag title="执行日志" width="90%">
     <div class="search">
       <el-input
         v-model="searchVal"
@@ -81,7 +81,13 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination :get-data="getMissionLogList" :total="totalElements" />
+    <pagination
+      ref="pagination"
+      :get-data="getMissionLogList"
+      :now-page.sync="nowPage"
+      :now-size.sync="nowSize"
+      :total="totalElements"
+    />
   </el-dialog>
 </template>
 
@@ -91,6 +97,8 @@ export default {
     return {
       searchVal: "",
       selectType: "",
+      // 当前页数
+      nowPage: 1,
       // 当前页条数
       nowSize: 10,
       // 总条数
@@ -113,11 +121,11 @@ export default {
   methods: {
     // 点击搜索
     search() {
-      this.getMissionLogList(1, this.nowSize);
+      this.$refs.pagination.toFirstPage()
     },
     // 回车搜索
     searchEnter(e) {
-      e.keyCode === 13 && this.getMissionLogList(1, this.nowSize);
+      e.keyCode === 13 && this.$refs.pagination.toFirstPage()
     },
     // 分页处理
     initialPage(totalElements) {
@@ -132,7 +140,7 @@ export default {
     },
     // 获取定时任务信息
     getMissionLogList(page, size) {
-      this.nowSize = size
+      this.nowSize = size;
       this.$http_normal({
         url: `/api/quartz/jobLogs?page=${page - 1}&size=${
           this.nowSize

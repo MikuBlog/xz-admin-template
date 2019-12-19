@@ -18,8 +18,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import { isMobile } from "@/utils/agent";
+import { isMobile, isSafari } from "@/utils/agent";
 import System from "./system";
 import Background from "./background";
 import Logo from "./logo";
@@ -33,23 +32,18 @@ export default {
   },
   mounted() {
     // 初始化进度条
-    if (!isMobile()) {
-      $(".drawer-setting .ivu-drawer-body").overlayScrollbars({
+    if (!isMobile() && !isSafari()) {
+      OverlayScrollbars(document.querySelector(".drawer-setting .ivu-drawer-body"), {
         scrollbars: {
           autoHide: "move"
         }
       });
     }
   },
-  computed: {
-    ...mapState({
-      settings: state => state.setting
-    })
-  },
   methods: {
     // 保存设置
     saveSetting() {
-      this.$setMemoryPmt("setting", this.settings);
+      this.$setMemoryPmt("setting", this.$store.state.setting);
       this.$refs.background.setBackgroundImage();
       this.$successMsg("保存设置成功");
     }
