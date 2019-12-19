@@ -8,7 +8,7 @@
             <i class="el-icon-question" style="float: right; font-size: 1.3rem; cursor: pointer" @click="$refs.Help.dialogVisible = true"/>
           </div>
           <el-tabs v-model="activeName" type="card">
-            <el-tab-pane label="Icons" name="first">
+            <el-tab-pane label="Svg Icons" name="first">
               <div class="icon-list">
                 <div
                   class="box"
@@ -67,13 +67,12 @@
   </div>
 </template>
 <script>
-import Data from "./mixins/data";
 import Initial from "./mixins/initial";
 import Operation from "./mixins/operation";
 import Property from "./mixins/property";
 import Help from './components/help'
 export default {
-  mixins: [ Data, Initial, Operation, Property ],
+  mixins: [ Initial, Operation, Property ],
   components: { Help }
 };
 </script>

@@ -221,17 +221,6 @@
     }
   }
 }
-// .back-top {
-//   position: fixed;
-//   z-index: 1500;
-//   right: 50px;
-//   bottom: 100px;
-// }
-.to-top {
-  position: relative;
-  transform: scale(0);
-  transition: 0.3s;
-}
 .radio-box {
   position: relative;
 }
@@ -239,20 +228,14 @@
   position: relative;
   padding: 20px;
 }
-.back-top {
-  position: fixed;
-  z-index: 1500;
-  right: 40px;
-  bottom: 60px;
-}
 .footer {
   padding: 0;
-  overflow: auto;
+  overflow-y: hidden;
+  overflow-x: auto;
   background: #fefefe;
   .coppy-right {
     position: relative;
-    line-height: 29px;
-    height: 29px;
+    line-height: 30px;
     background: #fefefe;
     border-top: 1px solid #dcdfe6;
     color: #666;

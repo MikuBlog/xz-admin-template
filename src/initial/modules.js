@@ -3,12 +3,14 @@ import Vue from 'vue'
 import mavonEditor from 'mavon-editor'
 // 引入导航栏折叠
 import Fragment from 'vue-fragment'
-// 引入图片剪裁组件
-import VueCropper from 'vue-cropper'
 // 引入表单生成器
 import FormMaking from 'form-making'
 // 引入表单生成器富文本
 import VueEditor from "vue2-editor"
+// 引入拖拽列表组件
+import draggable from 'vuedraggable'
+// 引入滚动条
+import 'overlayscrollbars'
 // 引入icon组件
 import '@/icons'
 // 引入UI框架
@@ -19,6 +21,7 @@ import '@/global/css/animation.css'
 import '@/global/css/elementUI.css'
 import '@/global/css/format.css'
 import '@/global/css/media.css'
+import '@/global/css/overlay-scroll.css'
 import '@/api/iconfont/iconfont'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'view-design/dist/styles/iview.css'
@@ -375,11 +378,11 @@ Vue.use(mavonEditor)
 Vue.component('treeselect', Treeselect)
 // 引入导航栏折叠
 Vue.use(Fragment.Plugin)
-// 引入图片剪裁组件
-Vue.use(VueCropper)
 // 引入表单生成器
 Vue.use(FormMaking)
 // 引入表单生成器富文本
 Vue.use(VueEditor)
+// 引入拖拽列表组件
+Vue.component(draggable.name, draggable)
 
 Vue.config.productionTip = false

@@ -14,7 +14,7 @@
   position: relative;
   line-height: 5rem;
   font-size: 4rem;
-  color: #1bc98e;
+  color: #3fc8c5;
   padding: 1rem;
   transition: 0.5s;
   border-radius: 1rem;
@@ -22,25 +22,25 @@
 
 .el-icon-user-solid:hover {
   color: #fefefe;
-  background: #1bc98e;
+  background: #3fc8c5;
 }
 
 .el-icon-document {
-  color: rgb(56, 161, 242);
+  color: #38a3f5;
 }
 
 .el-icon-document:hover {
   color: #fefefe;
-  background: rgb(56, 161, 242);
+  background: #38a3f5;
 }
 
 .el-icon-coin {
-  color: #000;
+  color: #f3516b;
 }
 
 .el-icon-coin:hover {
   color: #fefefe;
-  background: #ff3758;
+  background: #f3516b;
 }
 
 .el-icon-shopping-cart-1 {
