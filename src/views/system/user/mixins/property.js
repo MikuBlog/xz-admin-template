@@ -43,6 +43,7 @@ export default {
       userList: [],
       selectList: [],
       buttonOptions: [{
+        type: "primary",
         icons: 'el-icon-plus',
         title: "添加新用户",
         method: "showAddUser"

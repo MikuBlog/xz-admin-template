@@ -21,7 +21,12 @@ import { MessageBox } from 'mint-ui';
             </el-select>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
           </div>
-          <el-table :data="exceptionLogList" :highlight-current-row="true" style="width: 100%" :stripe="true">
+          <el-table
+            :data="exceptionLogList"
+            style="width: 100%"
+            highlight-current-row
+            stripe
+          >
             <el-table-column type="expand">
               <template slot-scope="props">
                 <el-form label-position="left" inline class="demo-table-expand">
@@ -67,18 +72,13 @@ import { MessageBox } from 'mint-ui';
               </template>
             </el-table-column>
           </el-table>
-          <div class="pagination">
-            <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :page-sizes="[10, 25, 50, 100]"
-              :page-size.sync="nowSize"
-              :pager-count="5"
-              :small="this.defaultConfig.paginationSize"
-              :layout="this.defaultConfig.paginationLayout"
-              :total="totalElements"
-            ></el-pagination>
-          </div>
+          <pagination
+            ref="pagination"
+            :get-data="getExceptionLogList"
+            :now-page.sync="nowPage"
+            :now-size.sync="nowSize"
+            :total="totalElements"
+          />
         </el-card>
       </el-col>
     </el-row>
@@ -87,13 +87,13 @@ import { MessageBox } from 'mint-ui';
 </template>
 
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
-import Detail from './components/detail'
+import Initial from "./mixins/initial";
+import Operation from "./mixins/operation";
+import Property from "./mixins/property";
+import Detail from "./components/detail";
 export default {
-  mixins: [ Initial, Operation, Property ],
-  components: { Detail } 
+  mixins: [Initial, Operation, Property],
+  components: { Detail }
 };
 </script>
 

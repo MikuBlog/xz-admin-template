@@ -27,6 +27,7 @@ export default {
       menus: [],
       menuIds: [],
       buttonOptions: [{
+        type: "primary",
         icons: 'el-icon-plus',
         title: "添加角色",
         method: "showAddRole"

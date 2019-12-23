@@ -32,8 +32,8 @@
           <el-table
             :data="roleList"
             style="width: 100%;"
-            :highlight-current-row="true"
-            :stripe="true"
+            highlight-current-row
+            stripe
             @row-click="getRoleItem"
           >
             <el-table-column type="expand">
@@ -67,31 +67,18 @@
             </el-table-column>
             <el-table-column label="操作" width="150" fixed="right" align="center">
               <template slot-scope="scope">
-                <el-button
-                  type="primary"
-                  icon="el-icon-edit"
-                  @click="editRoleItem(scope.row)" 
-                ></el-button>
-                <el-button
-                  type="danger"
-                  icon="el-icon-delete"
-                  @click="deleteRole( scope.row)"                  
-                ></el-button>
+                <el-button type="primary" icon="el-icon-edit" @click="editRoleItem(scope.row)"></el-button>
+                <el-button type="danger" icon="el-icon-delete" @click="deleteRole( scope.row)"></el-button>
               </template>
             </el-table-column>
           </el-table>
-          <div class="pagination">
-            <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :page-sizes="[10, 25, 50, 100]"
-              :page-size.sync="nowSize"
-              :pager-count="5"
-              :small="this.defaultConfig.paginationSize"
-              :layout="this.defaultConfig.paginationLayout"
-              :total="totalElements"
-            ></el-pagination>
-          </div>
+          <pagination
+            ref="pagination"
+            :get-data="getRoleList"
+            :now-page.sync="nowPage"
+            :now-size.sync="nowSize"
+            :total="totalElements"
+          />
         </el-card>
       </el-col>
       <el-col :sm="24" :md="8">
@@ -146,20 +133,18 @@
         </el-card>
       </el-col>
     </el-row>
-    <operation-box 
-    :options="buttonOptions"
-    @showAddRole="showAddRole"/>
+    <operation-box :options="buttonOptions" @showAddRole="showAddRole" />
     <eForm ref="form" :is-add="isAdd" />
   </div>
 </template>
 
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
+import Initial from "./mixins/initial";
+import Operation from "./mixins/operation";
+import Property from "./mixins/property";
 import eForm from "./components/form";
 export default {
-  mixins: [ Initial, Operation, Property ],
+  mixins: [Initial, Operation, Property],
   components: { eForm }
 };
 </script>

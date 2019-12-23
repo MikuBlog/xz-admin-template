@@ -6,7 +6,7 @@ export default {
     // 复制图片地址
     copy(item) {
       this.$copyText(item.url).then(() => {
-        this.$successMsg("复制成功");
+        this.$successMsg("复制链接成功");
       });
     },
     // 批量删除图片
@@ -46,17 +46,16 @@ export default {
     },
     // 选中图片
     selectItem(picArray) {
+      this.selectImageList = picArray.map(val => val.url)
       this.idList = picArray.map(val => val.id);
     },
     // 点击搜索
     search() {
-      this.nowPage = 1;
-      this.getPictureList();
+      this.$refs.pagination.toFirstPage()
     },
     // 回车搜索
     searchEnter(e) {
-      this.nowPage = 1;
-      e.keyCode === 13 && this.getPictureList();
+      e.keyCode === 13 && this.$refs.pagination.toFirstPage();
     }
   }
 }

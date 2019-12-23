@@ -8,23 +8,17 @@
           </div>
           <div class="avatar-box">
             <div class="avatar">
-              <el-button 
-              icon="el-icon-upload" 
-              class="upload-button"
-              circle
-              @click="$refs.avatarForm.dialogVisible = true"></el-button>
-              <el-avatar
-                :size="120"
-                :src="user.avatar"
-              >
+              <el-button
+                icon="el-icon-upload"
+                class="upload-button"
+                circle
+                @click="$refs.avatarForm.dialogVisible = true"
+              ></el-button>
+              <el-avatar :size="120" :src="user.avatar">
                 <img src="https://myinterface.xuanzai.top/getPicture?type=error" />
               </el-avatar>
-              <div 
-              class="hover-plus"
-              @click="$refs.avatarForm.dialogVisible = true">
-                <svg-icon 
-                icon-class="add" 
-                class="add-avatar"/>
+              <div class="hover-plus" @click="isShow = true">
+                <svg-icon icon-class="add" class="add-avatar" />
               </div>
             </div>
             <div class="avatar-detail">
@@ -71,7 +65,12 @@
             ></el-input>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
           </div>
-          <el-table :data="operationLogList" :highlight-current-row="true" style="width: 100%" :stripe="true">
+          <el-table
+            :data="operationLogList"
+            style="width: 100%"
+            highlight-current-row
+            stripe
+          >
             <el-table-column label="行为" :show-overflow-tooltip="true">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.description }}</span>
@@ -100,37 +99,31 @@
               </template>
             </el-table-column>
           </el-table>
-          <div class="pagination">
-            <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :page-sizes="[10, 25, 50, 100]"
-              :page-size.sync="nowSize"
-              :pager-count="5"
-              :small="this.defaultConfig.paginationSize"
-              :layout="this.defaultConfig.paginationLayout"
-              :total="totalElements"
-            ></el-pagination>
-          </div>
+          <pagination
+            ref="pagination"
+            :get-data="getOpertionLogList"
+            :now-page.sync="nowPage"
+            :now-size.sync="nowSize"
+            :total="totalElements"
+          />
         </el-card>
       </el-col>
     </el-row>
     <editPassword ref="pswForm" />
     <editEmail ref="emailForm" @updateUserInfo="updateUserInfo" />
-    <editAvatar ref="avatarForm" @updateUserInfo="updateUserInfo" />
+    <upload-avatar :is-show.sync="isShow" :upload-avatar="uploadAvatar" />
   </div>
 </template>
 
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
+import Initial from "./mixins/initial";
+import Operation from "./mixins/operation";
+import Property from "./mixins/property";
 import editPassword from "./components/edit_password";
 import editEmail from "./components/edit_email";
-import editAvatar from "./components/edit_avatar";
 export default {
-  mixins: [ Initial, Operation, Property ],
-  components: { editPassword, editEmail, editAvatar }
+  mixins: [Initial, Operation, Property],
+  components: { editPassword, editEmail }
 };
 </script>
 

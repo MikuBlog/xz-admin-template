@@ -70,26 +70,22 @@ export default {
     },
     // 回车搜索
     searchEnter_1(e) {
-      this.nowPage_1 = 1;
       e.keyCode === 13 &&
         (this.selectType_1
-          ? this.getDictionaryList()
+          ? this.$refs.pagination_1.toFirstPage()
           : this.$warnMsg("请选择搜索类型"));
     },
     searchEnter_2(e) {
-      this.nowPage_2 = 1;
-      e.keyCode === 13 && this.getDetailList();
+      e.keyCode === 13 && this.$refs.pagination_2.toFirstPage()
     },
     // 点击搜索
     search_1() {
-      this.nowPage_1 = 1;
       this.selectType_1
-        ? this.getDictionaryList()
+        ? this.$refs.pagination_1.toFirstPage()
         : this.$warnMsg("请选择搜索类型");
     },
     search_2() {
-      this.nowPage_2 = 1;
-      this.getDetailList();
+      this.$refs.pagination_2.toFirstPage()
     },
   }
 }

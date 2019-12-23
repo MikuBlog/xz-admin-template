@@ -3,12 +3,14 @@ import Vue from 'vue'
 import mavonEditor from 'mavon-editor'
 // 引入导航栏折叠
 import Fragment from 'vue-fragment'
-// 引入图片剪裁组件
-import VueCropper from 'vue-cropper'
 // 引入表单生成器
 import FormMaking from 'form-making'
 // 引入表单生成器富文本
 import VueEditor from "vue2-editor"
+// 引入拖拽列表组件
+import draggable from 'vuedraggable'
+// 引入滚动条
+import 'overlayscrollbars'
 // 引入icon组件
 import '@/icons'
 // 引入UI框架
@@ -19,6 +21,7 @@ import '@/global/css/animation.css'
 import '@/global/css/elementUI.css'
 import '@/global/css/format.css'
 import '@/global/css/media.css'
+import '@/global/css/overlay-scroll.css'
 import '@/api/iconfont/iconfont'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'view-design/dist/styles/iview.css'
@@ -29,8 +32,6 @@ import 'form-making/dist/FormMaking.css'
 import Message from '@/api/message'
 // 引入树状选择器
 import Treeselect from '@riophae/vue-treeselect'
-// 引入浏览器数据库模块
-import Database from '@/api/database'
 // 引入二次封装的axios模块
 import Http from '@/api/http'
 // 引入websocket模块
@@ -51,65 +52,14 @@ import Copy from '@/api/dom/copy'
 import FullScreen from '@/api/other/full_screen'
 // 引入存储模块
 import Memory from '@/api/storage'
-// 引入文件下载模块
-import Download from '@/api/file/download'
-// 引入打印功能
-import Print from '@/api/file/print'
 // 引入图片读取模块
 import ReadImg from '@/api/file/get_file_image'
 // 引入文件读取模块
 import ReadFile from '@/api/file/get_file_image'
-// 引入文件预览模块
-import PreviewFile from '@/api/file/preview_file'
 // 引入json美化模块
 import JsonPretty from '@/api/json'
-// 引入图片加载动画模块
-import ImageLoad from '@/api/other/image_load'
-// 引入数组模块
-import ArrayMethod from '@/api/array'
-// 引入控制流量模块
-import control from '@/api/control'
 // 引入全局配置模块
 import DefaultConfig from '@/global/js/config'
-/**
- * @author xuanzai
- * @description 连接数据库
- * @param {String} databaseName 数据库名称
- * @returns {Promise}
- */
-Vue.prototype.$connectDatabase = Database.connectDatabase
-/**
- * @author xuanzai
- * @description 创建表格
- * @param {String} tableName 表名
- * @param {Object} options 参数
- */
-Vue.prototype.$createTable = Database.createTable
-/**
- * @author xuanzai
- * @description 添加数据
- * @param {String} tableName 表名
- * @param {Object} data 插入的数据
- * @returns {Promise}
- */
-Vue.prototype.$insert = Database.insert
-/**
- * @author xuanzai
- * @description 查找数据
- * @param {String} tableName 表名
- * @param {Number} id 数据id
- * @returns {Promise}
- */
-Vue.prototype.$update = Database.find
-/**
- * @author xuanzai
- * @description 修改数据
- * @param {String} tableName 表名
- * @param {Number} id 数据id
- * @param {Number} data 修改数据
- * @returns {Promise}
- */
-Vue.prototype.$find = Database.update
 /**
  * @author xuanzai
  * @description 添加axios实例
@@ -204,29 +154,6 @@ Vue.prototype.$setCssText = SetStyle.setCssText
 Vue.prototype.$createStyle = SetStyle.createStyle
 /**
  * @author xuanzai
- * @description 设置白昼模式
- */
-Vue.prototype.$clearMode = SetStyle.clearMode
-/**
- * @author xuanzai
- * @description 设置夜间模式
- * @param {Boolean} isDark 是否夜间（默认为true）
- */
-Vue.prototype.$darkMode = SetStyle.darkMode
-/**
- * @author xuanzai
- * @description 设置色弱模式
- * @param {Boolean} isWeakness 是否夜间（默认为true）
- */
-Vue.prototype.$weaknessMode = SetStyle.weaknessMode
-/**
- * @author xuanzai
- * @description 设置反转模式
- * @param {Boolean} isHueRotate 是否夜间（默认为true）
- */
-Vue.prototype.$hueRotateMode = SetStyle.hueRotateMode
-/**
- * @author xuanzai
  * @description 设置全屏函数与取消全屏函数
  * @param {DOM Object} element DOM元素
  */
@@ -284,20 +211,6 @@ Vue.prototype.$getImgFile = ReadImg.getImgFile
 Vue.prototype.$getFile = ReadFile
 /**
  * @author xuanzai
- * @description 获取图片文件地址与文件信息
- * @param {String} url 文件地址
- */
-Vue.prototype.$previewFile = PreviewFile
-/**
- * @author xuanzai
- * @description 下载文件
- * @param {String} url 下载路径
- * @param {String} fileName 文件名称
- * @param {Boolean} isBlob 是否为二进制文件
- */
-Vue.prototype.$download = Download
-/**
- * @author xuanzai
  * @description 文本复制
  * @param {DOM | String} obj 要复制的内容或DOM文本节点
  * @returns {Promise}
@@ -319,53 +232,6 @@ Vue.prototype.$insertAfter = InsertAfter
 Vue.prototype.$jsonPretty = JsonPretty
 /**
  * @author xuanzai
- * @description 图片加载模块
- * @param {String} url
- */
-Vue.prototype.$imageLoad = ImageLoad
-/**
- * @author xuanzai
- * @description 排序（只排字段值为数字和日期）
- * @param {Array} list 需要排序的数组
- * @param {Boolean} isDes 是否倒序
- * @param {String} property 如果排序元素为对象，可指定需要排序的字段
- * @returns {Array} 返回新的数组
- */
-Vue.prototype.$sortList = ArrayMethod.sortList
-/**
- * @author xuanzai
- * @description 排序
- * @param {Array} list 需要排序的数组
- * @param {Boolean} isDes 是否倒序
- * @param {String} property 如果排序元素为对象，可指定需要排序的字段
- * @returns {Array} 返回新的数组
- */
-Vue.prototype.$searchResult = ArrayMethod.searchResult
-/**
- * @author xuanzai
- * @description 判断是否为移动端
- * @param {HTML}
- */
-Vue.prototype.$print = Print
-/**
- * @author xuanzai
- * @description 防抖函数
- * @param {Function} callback 回调函数
- * @param {Number} time 单位ms
- * @param {Boolean} immediate 第一次是否调用
- * @returns {Function}
- */
-Vue.prototype.$debounce = control.debounce
-/**
- * @author xuanzai
- * @description 节流函数
- * @param {Function} callback 回调函数
- * @param {Number} wait 单位ms
- * @returns {Function}
- */
-Vue.prototype.$throttled = control.throttled
-/**
- * @author xuanzai
  * @description 全局通用配置
  */
 Vue.prototype.defaultConfig = DefaultConfig
@@ -375,11 +241,11 @@ Vue.use(mavonEditor)
 Vue.component('treeselect', Treeselect)
 // 引入导航栏折叠
 Vue.use(Fragment.Plugin)
-// 引入图片剪裁组件
-Vue.use(VueCropper)
 // 引入表单生成器
 Vue.use(FormMaking)
 // 引入表单生成器富文本
 Vue.use(VueEditor)
+// 引入拖拽列表组件
+Vue.component(draggable.name, draggable)
 
 Vue.config.productionTip = false

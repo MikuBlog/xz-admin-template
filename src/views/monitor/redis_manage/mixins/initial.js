@@ -1,19 +1,5 @@
 export default {
-  created() {
-    // 初始化页面数据
-    this.getRedisList();
-  },
   methods: {
-    // 条数变化
-    handleSizeChange(size) {
-      this.nowSize = size;
-      this.getRedisList();
-    },
-    // 页数变化
-    handleCurrentChange(page) {
-      this.nowPage = page;
-      this.getRedisList();
-    },
     // 分页处理
     initialPage(totalElements) {
       this.totalElements = totalElements;
@@ -26,10 +12,10 @@ export default {
       });
     },
     // 获取缓存信息
-    getRedisList() {
+    getRedisList(page, size) {
       this.$http_normal({
-        url: `/api/redis/page?page=${this.nowPage - 1}&size=${
-          this.nowSize
+        url: `/api/redis/page?page=${page - 1}&size=${
+          size
           }&key=${this.searchVal || "*"}`,
         method: "get"
       }).then(result => {

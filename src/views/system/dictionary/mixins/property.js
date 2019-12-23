@@ -15,7 +15,7 @@ export default {
       // 总条数
       totalElements_1: 0,
       // 当前页数
-      nowPage_2: 1,
+      nowPage_2: 1, 
       // 当前页条数
       nowSize_2: 10,
       // 总条数
@@ -35,6 +35,7 @@ export default {
         }
       ],
       buttonOptions: [{
+        type: "primary",
         icons: 'el-icon-plus',
         title: "添加字典",
         method: "addDictionary"

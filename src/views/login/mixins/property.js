@@ -2,7 +2,6 @@ export default {
   data() {
     return {
       labelPosition: "left",
-      isShowDrawer: false,
       activeName: "0",
       tab: [1, 0],
       backgroundUrl: this.$getMemoryPmt("backgroundUrl") || "",

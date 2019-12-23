@@ -20,7 +20,13 @@
             </el-select>
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
           </div>
-          <el-table :data="operationLogList" :highlight-current-row="true" style="width: 100%" :stripe="true">
+          <el-table
+            class="table"
+            :data="operationLogList"
+            style="width: 100%"
+            highlight-current-row
+            stripe
+          >
             <el-table-column type="expand">
               <template slot-scope="props">
                 <el-form label-position="left" inline class="demo-table-expand">
@@ -66,18 +72,13 @@
               </template>
             </el-table-column>
           </el-table>
-          <div class="pagination">
-            <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :page-sizes="[10, 25, 50, 100]"
-              :page-size.sync="nowSize"
-              :pager-count="5"
-              :small="this.defaultConfig.paginationSize"
-              :layout="this.defaultConfig.paginationLayout"
-              :total="totalElements"
-            ></el-pagination>
-          </div>
+          <pagination
+            ref="pagination"
+            :get-data="getOpertionLogList"
+            :now-page.sync="nowPage"
+            :now-size.sync="nowSize"
+            :total="totalElements"
+          />
         </el-card>
       </el-col>
     </el-row>
@@ -85,11 +86,11 @@
 </template>
 
 <script>
-import Initial from './mixins/initial'
-import Operation from './mixins/operation'
-import Property from './mixins/property'
+import Initial from "./mixins/initial";
+import Operation from "./mixins/operation";
+import Property from "./mixins/property";
 export default {
-  mixins: [ Initial, Operation, Property ]
+  mixins: [Initial, Operation, Property]
 };
 </script>
 

@@ -36,21 +36,6 @@ this.$urlQuery([url]) // url: http://myinterface.xuanzai.top/getPicture?type=头
 
 ```
 
-## print
-
-描述：打印文档
-
-注意：该`API`不兼容`IE`
-
-参数：
-
-+ `page`：`HTML`字符串[`String`]（选填：默认为空）
-
-示例：
-```js
-this.$print(page)
-```
-
 ## createSocket
 
 描述：连接`wesocket`
@@ -73,172 +58,6 @@ this
       onClose(e) {} // websocket关闭后的回调（选填）
     }
   ) // 返回WebSocket实例
-```
-
-## Theme
-
-所有主题模式都用在`body`标签上，也就是所有样式都会被改为对应的主题模式
-
-注意：一次性设置多种主题不会重叠，而是相互覆盖。（不兼容`IE`）
-
-如果有的元素不想被主题样式覆盖掉，请前往`src/global/js/config.js`文件进行配置：
-
-```js
-// 不受主题影响的元素（标签、类、id）
-excludeEles: [
-  "img", // 图片
-  "video", // 视频
-  "iframe", // 内嵌网站
-  "embed", // 插件
-  "object",
-  '.el-message', // 提示信息
-  '.el-notification', // 通知信息
-  /* 背景图 */
-  '[style*="background:url"]',
-  '[style*="background-image:url"]',
-  '[style*="background: url"]',
-  '[style*="background-image: url"]',
-  '[style*="background-image"][style*="image-set"]'
-],
-```
-
-### clearMode
-
-描述：白昼模式主题，也称为正常模式，调用该方法后会重置所有主题样式。
-
-示例
-```js
-this.$clearMode() // 开启白昼模式
-```
-
-### darkMode
-
-描述：夜间模式主题
-
-参数：
-
-`isDark`：是否为黑暗模式[`Boolean`]（选填：默认值为true，关闭时需传入false）
-
-示例
-```js
-this.$darkMode() // 开启夜间模式
-this.$darkMode(false) // 关闭夜间模式
-```
-
-### weaknessMode
-
-描述：色弱模式
-
-参数：
-
-`isWeakness`：是否为色弱模式[`Boolean`]（选填：默认值为true，关闭时需传入false）
-
-示例
-```js
-this.$weaknessMode() // 开启色弱模式
-this.$weaknessMode(false) // 关闭色弱模式
-```
-
-### hueRotateMode
-
-描述：转换模式
-
-参数：
-
-`isHueRotate`：是否为转换模式[`Boolean`]（选填：默认值为true，关闭时需传入false）
-
-示例
-```js
-this.$hueRotateMode() // 开启描述：转换模式
-this.$hueRotateMode(false) // 关闭描述：转换模式
-```
-
-## Array
-
-### sortList
-
-描述：对元素为对象的数组进行排序
-
-注意：只对值为日期、数字、字符串为数字的字段进行排序。原数组会改变。
-
-参数：
-
-+ `list`: 需要排序的数组 [`Array`]（必填）
-+ `isDes`: 是否倒序[`Boolean`]（选填：默认为false）
-+ `property`: 对象排序字段[`String`]（选填：默认为空）
-
-返回值：`Array`
-
-示例：
-```js
-let list = [{ name: "旋仔", level: 3 }, 
-{ name: "旋仔", level: 1 }, 
-{ name: "旋仔", level: 2 }]
-this.$sortList(list, true, 'level') // [{ name: "旋仔", level: 3 }, { name: "旋仔", level: 2 }, { name: "旋仔", level: 1 }]
-```
-
-### searchResult
-
-描述：查找元素（模糊搜索）
-
-参数：
-
-+ `list`: 需要查找的数组 [`Array`]（必填）
-+ `keys`: 查找包含的字段[`Array`]（必填）
-+ `value`: 需要查找的值[`String`]（必填）
-
-返回值：`Array`
-
-示例：
-```js
-let list = [{ name: "旋仔", age: 20 }, { name: "小伙子", age: 16 }]
-this.$searchResult(list, ['name'], '旋仔') // [{ name: "旋仔", age: 20 }]
-this.$searchResult(list, ['name'], 'xxx') // []
-```
-
-## control
-
-### debounce
-
-描述：防抖函数
-
-效果：用户交互行为不触发回调函数，一段时间后
-
-参数：
-
-+ `callback`：回调函数（必填）
-+ `time`：防抖时间间隔（必填）
-+ `immediate`：第一次点击是否立刻执行（选填：默认为true）
-
-返回值：`Function`
-
-示例：
-```js
-const callback = () => {
-  // todo
-}
-const debounceFun = this.$debounce(callback, 2500, true)
-```
-
-### throttled
-
-描述：节流函数
-
-效果：用户交互行为间隔触发回调，防止用户频繁点击
-
-参数：
-
-+ `callback`：回调函数（必填）
-+ `wait`：节流时间间隔（必填）
-
-返回值：`Function`
-
-示例：
-```js
-const callback = () => {
-  // todo
-}
-const throttledFun = this.$throttled(callback, 2500)
 ```
 
 ## Style
@@ -298,24 +117,6 @@ this.$createStyle(`
 
 ## File
 
-### download
-
-描述：文件下载
-
-参数：
-
-+ `url`：地址 [`String`/`Array`]（必填）
-+ `fileName`: 文件名称 [`String`]（单文件下载时必填，多文件下载时不填）
-+ `isBlob`: 是否为后台返回的二进制文件 [`Boolean`]（选填：默认为false）
-
-示例：
-```js
-// 单文件下载
-this.$download(url, fileName)
-// 批量文件下载（url为下载链接数组）
-this.$download(url) // url : [http://xxx.com, http://xxxx.com]
-```
-
 ###  getImgFile
 
 描述：获取图片信息，图片预览
@@ -361,21 +162,6 @@ this
 	.then(raw => {
 		// todo
 	})
-```
-
-### previewFile
-
-描述：预览文件
-
-注意：该`api`使用了微软的预览接口，因此，需要预览的文件（文档）需要存放在线上（能通过外网访问静态文件）。
-
-参数：
-
-+ `url`：文件路径 [`String`]（必填）
-
-示例：
-```js
-this.$previewFile(url)
 ```
 
 ## Date

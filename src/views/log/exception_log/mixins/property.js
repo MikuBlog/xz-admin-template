@@ -1,6 +1,7 @@
 export default {
   data() {
     return {
+      pagination: "",
       searchVal: "",
       selectType: "",
       exceptionLogList: [],

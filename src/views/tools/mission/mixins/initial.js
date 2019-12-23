@@ -1,19 +1,5 @@
 export default {
-  created() {
-    // 初始化页面数据
-    this.getMissionList();
-  },
   methods: {
-    // 条数变化
-    handleSizeChange(size) {
-      this.nowSize = size;
-      this.getMissionList();
-    },
-    // 页数变化
-    handleCurrentChange(page) {
-      this.nowPage = page;
-      this.getMissionList();
-    },
     // 分页处理
     initialPage(totalElements) {
       this.totalElements = totalElements;
@@ -26,10 +12,10 @@ export default {
       });
     },
     // 获取定时任务信息
-    getMissionList() {
+    getMissionList(page, size) {
       this.$http_normal({
-        url: `/api/quartz/page?page=${this.nowPage - 1}&size=${
-          this.nowSize
+        url: `/api/quartz/page?page=${page - 1}&size=${
+          size
         }&sort=createTime,desc${
           this.searchVal ? `&jobName=${this.searchVal}` : ""
         }${

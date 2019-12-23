@@ -1,19 +1,5 @@
 export default {
-  created() {
-    // 初始化权限日志列表
-    this.getAuthorityLogList();
-  },
   methods: {
-    // 条数变化
-    handleSizeChange(size) {
-      this.nowSize = size;
-      this.getAuthorityLogList();
-    },
-    // 页数变化
-    handleCurrentChange(page) {
-      this.nowPage = page;
-      this.getAuthorityLogList();
-    },
     // 分页处理
     initialPage(totalElements) {
       this.totalElements = totalElements;
@@ -44,11 +30,9 @@ export default {
       });
     },
     // 获取权限日志信息
-    getAuthorityLogList() {
+    getAuthorityLogList(page, size) {
       this.$http_normal({
-        url: `/api/authLog/page?page=${this.nowPage - 1}&size=${
-          this.nowSize
-          }&sort=createTime,desc${
+        url: `/api/authLog/page?page=${page - 1}&size=${size}&sort=createTime,desc${
           this.selectType_1 ? `&${this.selectType_1}=${this.searchVal}` : ""
           }${
           this.date

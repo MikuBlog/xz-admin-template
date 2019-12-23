@@ -71,6 +71,8 @@
   top: 0;
   bottom: 0;
   margin: auto;
+  width: 22rem;
+  height: 33rem;
   background: rgba(0, 0, 0, 0.35);
   transition: 0.5s;
   border-radius: 5px;

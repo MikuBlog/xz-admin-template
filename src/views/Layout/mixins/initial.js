@@ -1,4 +1,4 @@
-import { isMobile } from '@/utils/agent'
+import { isMobile, isSafari } from '@/utils/agent'
 import { mapState } from 'vuex'
 import Vue from 'vue'
 export default {
@@ -9,9 +9,11 @@ export default {
     this.getLogo()
     // 初始化布局大小
     this.initialSize()
+    this.$successTip({ msg: "欢迎回来", title: "Welcome" })
   },
   computed: {
     ...mapState({
+      themeColor: state => state.setting.themeColor,
       showLogo: state => state.setting.showLogo,
       isVerticleMenu: state => state.setting.isVerticleMenu,
       showBreadcrumb: state => state.setting.showBreadcrumb,
@@ -59,14 +61,17 @@ export default {
   methods: {
     // 初始化滚动条样式
     initialScrollBar() {
-      if (!isMobile()) {
-        $('.top').overlayScrollbars({
+      if (!isMobile() && !isSafari()) {
+        OverlayScrollbars(document.querySelector('#top'), {
           scrollbars: {
             autoHide: "move"
           }
         })
         const scrollContent = document.querySelector('.os-viewport')
         this.$setStyle(scrollContent, 'padding-bottom', '20px')
+        scrollContent.scrollTop = this.$getMemorySes('scrollTop')
+      }else {
+        document.querySelector('#top').scrollTop = this.$getMemorySes('scrollTop')
       }
     },
     // 初始化布局大小
@@ -82,22 +87,17 @@ export default {
         drawerContent = document.querySelector('.drawer-menu .ivu-drawer-content'),
         horizontalScrollbar = document.querySelector('.menu-horizontal-scrollbar>.el-scrollbar__wrap')
       this.$setStyle(
-        menuScrollBar,
-        'background',
-        this.menuStyle === 'dark'
-          ? this.defaultConfig.menuStyle.dark.backgroundColor
-          : this.defaultConfig.menuStyle.light.backgroundColor)
-      this.$setStyle(
         horizontalScrollbar,
         'background',
         this.menuStyle === 'dark'
           ? this.defaultConfig.menuStyle.dark.backgroundColor
           : this.defaultConfig.menuStyle.light.backgroundColor)
-      this.$setStyle(
-        menuScrollBar,
-        'border-right',
-        '1px solid #dcdfe6'
-      )
+      this.$setStyle( menuScrollBar, {
+        borderRight: '1px solid #dcdfe6',
+        background: this.menuStyle === 'dark'
+        ? this.defaultConfig.menuStyle.dark.backgroundColor
+        : this.defaultConfig.menuStyle.light.backgroundColor
+      })
       this.$setStyle(
         drawerContent,
         'background',
@@ -148,8 +148,8 @@ export default {
         ? (this.isSmall = true, this.isCollapse = true, this.isMenuCollapse = false)
         : this.isSmall = false
       window.innerWidth < 768
-        ? this.isMini = true
-        : this.isMini = false
+        ? (!this.isVerticleMenu && (this.$refs.iconBox.isMini = true), this.isMini = true)
+        : (!this.isVerticleMenu && (this.$refs.iconBox.isMini = false), this.isMini = false)
     },
     // 获取滚动高度
     getScrollTop(obj) {
@@ -165,7 +165,7 @@ export default {
       window.addEventListener('resize', () => {
         this.getWindowWidth()
       })
-      if(!isMobile()) {
+      if(!isMobile() && !isSafari()) {
         document.querySelector('.os-viewport').addEventListener('scroll', function () {
           _this.getScrollTop(this)
         })

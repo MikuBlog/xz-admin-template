@@ -6,13 +6,24 @@ export default {
     },
     // 点击搜索
     search() {
-      this.nowPage = 1;
-      this.getOpertionLogList();
+      this.$refs.pagination.toFirstPage()
     },
     // 回车搜索
     searchEnter(e) {
-      this.nowPage = 1;
-      e.keyCode === 13 && this.getOpertionLogList();
+      e.keyCode === 13 && this.$refs.pagination.toFirstPage()
+    },
+    uploadAvatar(result) {
+      this.$http_file({
+        url: '/api/user/updateAvatar',
+        method: 'post',
+        data: {
+          file: result
+        }
+      }).then(() => {
+        this.isShow = false;
+        this.updateUserInfo()
+        this.$successMsg('更换头像成功，正在缓慢加载中~');
+      })
     },
     // 修改密码
     showEditPassword() {

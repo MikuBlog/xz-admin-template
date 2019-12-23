@@ -81,24 +81,24 @@
     <el-row style="margin-top: 1rem">
       <el-col :span="24">
         <el-card class="box-card">
-          <ve-line :data="lineData" :settings="lineSettings"></ve-line>
+          <ve-line :data="lineData" :settings="lineSettings" :colors="colors"></ve-line>
         </el-card>
       </el-col>
     </el-row>
     <el-row style="margin-top: 1rem" :gutter="20">
       <el-col :xs="24" :sm="24" :md="24" :lg="8">
         <el-card class="box-card">
-          <ve-ring :data="ringData" :settings="ringSettings"></ve-ring>
+          <ve-ring :data="ringData" :settings="ringSettings" :colors="colors"></ve-ring>
         </el-card>
       </el-col>
       <el-col :xs="24" :sm="24" :md="24" :lg="8">
         <el-card class="box-card">
-          <ve-funnel :data="funnelData" :settings="funnelSettings"></ve-funnel>
+          <ve-funnel :data="funnelData" :settings="funnelSettings" :colors="colors"></ve-funnel>
         </el-card>
       </el-col>
       <el-col :xs="24" :sm="24" :md="24" :lg="8">
         <el-card class="box-card">
-          <ve-histogram :data="histogramData" :settings="histogramSettings"></ve-histogram>
+          <ve-histogram :data="histogramData" :settings="histogramSettings" :colors="colors"></ve-histogram>
         </el-card>
       </el-col>
     </el-row>
@@ -107,7 +107,7 @@
 
 <script>
 // 引入v-chart
-import Property from './mixins/property'
+import Property from "./mixins/property";
 import countTo from "vue-count-to";
 import VeLine from "v-charts/lib/line.common";
 import VePie from "v-charts/lib/pie.common";
@@ -115,7 +115,7 @@ import VeRing from "v-charts/lib/ring.common";
 import VeHistogram from "v-charts/lib/histogram.common";
 import VeFunnel from "v-charts/lib/funnel.common";
 export default {
-  mixins: [ Property ],
+  mixins: [Property],
   components: { VeLine, VePie, VeRing, VeHistogram, VeFunnel, countTo }
 };
 </script>

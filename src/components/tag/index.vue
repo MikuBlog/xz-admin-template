@@ -4,7 +4,7 @@
       <router-link
         v-for="tag in tagsList"
         ref="tag"
-        :class="isActive(tag) ? 'active' : ''"
+        :class="isActive(tag) ? 'activetag' : ''"
         :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
         :key="tag.path"
         tag="span"
@@ -97,7 +97,6 @@ export default {
   position: relative;
   height: 34px;
   width: calc(100% - 44px);
-  background: #fff;
   border-bottom: 1px solid #d8dce5;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
   .tags-view-wrapper {
@@ -120,7 +119,7 @@ export default {
       &:last-of-type {
         margin-right: 15px;
       }
-      &.active {
+      &.activetag {
         background-color: #409efe;
         color: #fff;
         border-color: #409efe;

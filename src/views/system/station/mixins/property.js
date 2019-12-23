@@ -23,6 +23,7 @@ export default {
         }
       ],
       buttonOptions: [{
+        type: "primary",
         icons: 'el-icon-plus',
         title: "添加岗位",
         method: "showAddStation"
