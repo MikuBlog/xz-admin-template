@@ -10,6 +10,7 @@ export default {
       nowSize: 10,
       // 总条数
       totalElements: 0,
+      selectImageList: [],
       pictureList: [],
       idList: [],
       isShow: false,

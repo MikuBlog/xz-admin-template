@@ -1,17 +1,8 @@
-<h1 align="center">XZ-ADMIN</h1>
+<h1 align="center">XZ-ADMIN-TEMPLATE</h1>
 
-当前最新版本：`2.0.0`（日期：2019-12-15）
+简化版
 
 <br/>
-<br/>
-
-## :smirk: 页面浏览 
-
-[演示地址](https://xzadmin.xuanzai.top)
-
-账号：xuanzai
-密码：123456（只有查看权限）
-
 <br/>
 
 ## :star: 安装步骤
@@ -19,8 +10,6 @@
 安装：在项目目录下`npm install`
 
 运行：在项目目录下`npm run serve`
-
-查阅文档，[快速上手](http://xzadmin-docs.xuanzai.top)
 
 如有问题，欢迎提`issues`
 

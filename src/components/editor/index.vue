@@ -4,19 +4,27 @@
 </template>
 
 <script>
+/**
+ * @author xuanzai
+ * @description 二次封装百度富文本编辑器
+ */
 import VueUeditorWrap from "vue-ueditor-wrap";
 export default {
   name: "Editor",
   components: { VueUeditorWrap },
+  model: {
+    prop: "msg",
+    event: "input"
+  },
   props: {
     msg: {
-		type: String,
-		default: ""
-	}
+      type: String,
+      default: ""
+    }
   },
   data() {
     return {
-      data: this.msg,
+      data: "",
       myConfig: {
         // 编辑器是否自动被内容撑高
         autoHeightEnabled: true,
@@ -32,13 +40,16 @@ export default {
     };
   },
   watch: {
-	// 当父组件异步传入参数的时候，改变富文本的值
-	msg(val) {
-	  this.data = val
-	},
-	// 当富文本的值改变的时候，更新父组件的值
+    // 当父组件异步传入参数的时候，改变富文本的值
+    msg: {
+      handler(val) {
+        this.data = val
+      },
+      immediate: true
+    },
+    // 当富文本的值改变的时候，更新父组件的值
     data(val) {
-      this.$emit("@update:msg", val);
+      this.$emit("input", val);
     }
   }
 };

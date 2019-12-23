@@ -21,10 +21,11 @@
             <el-button icon="el-icon-search" class="margin-box" @click="search" circle></el-button>
           </div>
           <el-table
+            class="table"
             :data="operationLogList"
-            :highlight-current-row="true"
             style="width: 100%"
-            :stripe="true"
+            highlight-current-row
+            stripe
           >
             <el-table-column type="expand">
               <template slot-scope="props">
