@@ -50,3 +50,14 @@
   }
 </script>
 
+<style lang="scss" scoped>
+  .menu-title {
+    position: relative;
+    margin-left: 7px;
+  }
+  svg {
+    position: relative;
+    right: 6px;
+  }
+</style>
+

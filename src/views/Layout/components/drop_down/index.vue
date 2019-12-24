@@ -58,4 +58,9 @@ export default {
   position: relative;
   height: 40px;
 }
+.line {
+  position: relative;
+  height: 0;
+  border: 1px solid #eee;
+}
 </style>

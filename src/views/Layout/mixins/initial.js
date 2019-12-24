@@ -10,6 +10,7 @@ export default {
     // 初始化布局大小
     this.initialSize()
     this.$successTip({ msg: "欢迎回来", title: "Welcome" })
+    console.log(asdasd)
   },
   computed: {
     ...mapState({

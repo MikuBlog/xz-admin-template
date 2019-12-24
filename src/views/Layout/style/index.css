@@ -43,11 +43,11 @@
 
 .el-menu {
   background: transparent;
-  width: 200px;
+  width: 205px;
 }
 
 .el-menu--collapse {
-  width: 63px;
+  width: 53px;
 }
 
 .el-menu-item {
@@ -62,12 +62,6 @@
 .image {
   height: 100%;
   border-radius: 1rem;
-}
-
-.line {
-  position: relative;
-  height: 0;
-  border: 1px solid #eee;
 }
 
 .tabs {

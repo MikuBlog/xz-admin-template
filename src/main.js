@@ -58,6 +58,12 @@ req
     Vue.component(component.name, component)
   })
 
+  Vue.config.errorHandler = function (err, vm, info) {
+    console.log(err.toString().split('at')[0])
+    console.log(vm.$vnode.tag)
+    console.log(info)
+  }
+  
 new Vue({
   router,
   store,
